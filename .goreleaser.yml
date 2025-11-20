@@ -77,7 +77,7 @@ brews:
     homepage: https://github.com/quinnypig/imagemage
     description: "A focused CLI tool for generating and editing images with Google's Gemini API without the bloat"
     license: MIT
-    folder: Formula
+    directory: Formula
     test: |
       system "#{bin}/imagemage --version"
     install: |
