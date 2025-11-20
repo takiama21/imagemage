@@ -27,7 +27,7 @@ builds:
       - -X main.date={{.Date}}
 
 archives:
-  - format: tar.gz
+  - id: default
     name_template: >-
       {{ .ProjectName }}_
       {{- .Version }}_
@@ -35,9 +35,12 @@ archives:
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
+    formats:
+      - tar.gz
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
     files:
       - LICENSE
       - README.md
@@ -46,7 +49,7 @@ checksum:
   name_template: 'checksums.txt'
 
 snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+  version_template: "{{ incpatch .Version }}-next"
 
 changelog:
   sort: asc
@@ -79,7 +82,7 @@ brews:
     license: MIT
     directory: Formula
     test: |
-      system "#{bin}/imagemage --version"
+      system "#{bin}/imagemage", "--version"
     install: |
       bin.install "imagemage"
 
