@@ -51,7 +51,7 @@ func init() {
 	editCmd.Flags().StringVarP(&editOutput, "output", "o", "", "Output path for edited image (default: base-image-edited.png)")
 	editCmd.Flags().StringArrayVarP(&editInputs, "input", "i", []string{}, "Additional input images for composition (can be used multiple times)")
 	editCmd.Flags().StringVarP(&editAspectRatio, "aspect-ratio", "a", "", "Aspect ratio for output")
-	editCmd.Flags().StringVarP(&editResolution, "resolution", "r", "", "Image resolution (1K, 2K, 4K). Defaults to 4K")
+	editCmd.Flags().StringVarP(&editResolution, "resolution", "r", "", "Image resolution (1K, 2K, 4K). Defaults to 4K for Pro model, 1K for --frugal")
 	editCmd.Flags().BoolVarP(&editFrugal, "frugal", "f", false, "Use the cheaper gemini-2.5-flash-image model")
 	editCmd.Flags().BoolVar(&editForce, "force", false, "Overwrite output file if it exists")
 	editCmd.Flags().BoolVar(&editStorePrompt, "store-prompt", false, "Store instruction in PNG metadata")
@@ -157,7 +157,12 @@ func runEdit(cmd *cobra.Command, args []string) error {
 	}
 	resolution := editResolution
 	if resolution == "" {
-		resolution = "4K"
+		// Show the actual default that will be used based on the model
+		if editFrugal {
+			resolution = "1K"
+		} else {
+			resolution = "4K"
+		}
 	}
 	fmt.Printf("Resolution: %s\n", resolution)
 	if editFrugal {

@@ -38,7 +38,7 @@ Examples:
   imagemage generate "cyberpunk city" --style="neon, futuristic"
   imagemage generate "wide cinematic shot" --aspect-ratio="21:9"
   imagemage generate "phone wallpaper" --aspect-ratio="9:16"
-  imagemage generate "concept art" --resolution="2K" --frugal`,
+  imagemage generate "concept art" --frugal`,
 	Args: cobra.MinimumNArgs(1),
 	RunE: runGenerate,
 }
@@ -51,7 +51,7 @@ func init() {
 	generateCmd.Flags().StringVarP(&generateStyle, "style", "s", "", "Additional style guidance (e.g., 'watercolor', 'pixel-art')")
 	generateCmd.Flags().BoolVarP(&generatePreview, "preview", "p", false, "Show preview information")
 	generateCmd.Flags().StringVarP(&generateAspectRatio, "aspect-ratio", "a", "", "Aspect ratio (1:1, 16:9, 9:16, 4:3, 3:4, 3:2, 2:3, 21:9, 5:4, 4:5)")
-	generateCmd.Flags().StringVarP(&generateResolution, "resolution", "r", "", "Image resolution (1K, 2K, 4K). Defaults to 4K")
+	generateCmd.Flags().StringVarP(&generateResolution, "resolution", "r", "", "Image resolution (1K, 2K, 4K). Defaults to 4K for Pro model, 1K for --frugal")
 	generateCmd.Flags().BoolVarP(&generateFrugal, "frugal", "f", false, "Use the cheaper gemini-2.5-flash-image model")
 	generateCmd.Flags().BoolVar(&generateSlide, "slide", false, "Optimize for presentation slides (4K, 16:9, with theme from config)")
 	generateCmd.Flags().StringVar(&generateConfig, "config", "", "Path to config file (JSON) with style, colorScheme, additionalContext")
@@ -147,7 +147,12 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	}
 	resolution := generateResolution
 	if resolution == "" {
-		resolution = "4K"
+		// Show the actual default that will be used based on the model
+		if generateFrugal {
+			resolution = "1K"
+		} else {
+			resolution = "4K"
+		}
 	}
 	fmt.Printf("Resolution: %s\n", resolution)
 	if generateFrugal {
