@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 const (
@@ -110,7 +111,7 @@ func NewClientWithModel(model string) (*Client, error) {
 
 	return &Client{
 		apiKey:     apiKey,
-		httpClient: &http.Client{},
+		httpClient: &http.Client{Timeout: 5 * time.Minute},
 		model:      model,
 		baseURL:    BaseURL,
 	}, nil

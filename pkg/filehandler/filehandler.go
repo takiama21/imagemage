@@ -1,12 +1,18 @@
 package filehandler
 
 import (
+	"bytes"
 	"encoding/base64"
 	"fmt"
+	"image"
+	_ "image/jpeg" // Register JPEG decoder
+	"image/png"
 	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"golang.org/x/image/draw"
 )
 
 // SaveImage saves base64 encoded image data to a file
@@ -107,4 +113,47 @@ func LoadImageAsBase64(path string) (string, error) {
 	}
 
 	return base64.StdEncoding.EncodeToString(data), nil
+}
+
+// ResizeAndSaveImage decodes base64 image data, resizes it to the target size, and saves to outputPath
+func ResizeAndSaveImage(imageData string, size int, outputPath string) error {
+	// Decode base64 image data
+	decoded, err := base64.StdEncoding.DecodeString(imageData)
+	if err != nil {
+		return fmt.Errorf("failed to decode image data: %w", err)
+	}
+
+	// Decode image
+	src, _, err := image.Decode(bytes.NewReader(decoded))
+	if err != nil {
+		return fmt.Errorf("failed to decode image: %w", err)
+	}
+
+	// Create destination image with target size (square for icons)
+	dst := image.NewRGBA(image.Rect(0, 0, size, size))
+
+	// Use high-quality CatmullRom interpolation for resizing
+	draw.CatmullRom.Scale(dst, dst.Bounds(), src, src.Bounds(), draw.Over, nil)
+
+	// Create directory if it doesn't exist
+	dir := filepath.Dir(outputPath)
+	if dir != "" && dir != "." {
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			return fmt.Errorf("failed to create directory: %w", err)
+		}
+	}
+
+	// Create output file
+	f, err := os.Create(outputPath)
+	if err != nil {
+		return fmt.Errorf("failed to create output file: %w", err)
+	}
+	defer f.Close()
+
+	// Encode as PNG
+	if err := png.Encode(f, dst); err != nil {
+		return fmt.Errorf("failed to encode PNG: %w", err)
+	}
+
+	return nil
 }
