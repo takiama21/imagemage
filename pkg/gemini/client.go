@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 const (
@@ -18,16 +19,16 @@ const (
 
 // Supported aspect ratios for Gemini image models
 var SupportedAspectRatios = []string{
-	"1:1",   // Square
-	"16:9",  // Landscape
-	"9:16",  // Portrait
-	"4:3",   // Landscape
-	"3:4",   // Portrait
-	"3:2",   // Landscape
-	"2:3",   // Portrait
-	"21:9",  // Ultra-wide
-	"5:4",   // Flexible
-	"4:5",   // Flexible
+	"1:1",  // Square
+	"16:9", // Landscape
+	"9:16", // Portrait
+	"4:3",  // Landscape
+	"3:4",  // Portrait
+	"3:2",  // Landscape
+	"2:3",  // Portrait
+	"21:9", // Ultra-wide
+	"5:4",  // Flexible
+	"4:5",  // Flexible
 }
 
 // Client represents a Gemini API client
@@ -110,7 +111,7 @@ func NewClientWithModel(model string) (*Client, error) {
 
 	return &Client{
 		apiKey:     apiKey,
-		httpClient: &http.Client{},
+		httpClient: &http.Client{Timeout: 5 * time.Minute},
 		model:      model,
 		baseURL:    BaseURL,
 	}, nil
